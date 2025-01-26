@@ -1,0 +1,92 @@
+﻿* These are based on stats as well as personal experience. If you disagree, please explain why or what you think makes a character a better counter or a bad counter. If you see an asterisk it means it depends on the player skill and capability of the team as a whole, if it isn't an asterisk that means the character should relatively directly counter off kit alone.
+* * Also Side Note, in many circumstances any character can counter any character this is just a comprehensive list of my gathered game knowledge that could help us in the future should it be needed.
+* * Also Also, I find it redundant to put down every healer with a you cant kill us ult as a counter for every dps, so just assume Luna Snow Diffs and move on.
+* * 
+
+Adam Warlock: Hard Counter - Thor, Starlord, Captain America, Venom, Hulk, Black Panther, Magik, Iron Fist, Psylocke
+
+Black Panther: Hard Counter - Namor, Magik
+    Soft Counter - Loki
+
+Black Widow: Hard Counter - Have a functioning brain
+
+Captain America: Hard Counter - Peni Parker, Namor, Wolverine
+    Soft Counter - Moon Knight, Punisher
+
+Cloak and Dagger: Hard Counter - Spiderman, Magik, Iron Fist, Psylocke, Dr Strange
+
+Doctor Strange: Hard Counter - Wolverine, Punisher, Iron Man
+    Soft Counter - Magneto
+
+Groot: Hard Counter - Squirrel Girl, Punisher
+    Soft Counter - Wolverine
+
+Hawkeye: Hard Counter - Black Panther, Psylocke
+    Soft Counter - Starlord
+
+Hela: Hard Counter - Hawkeye, Black Panther, Psylocke 
+    Soft Counter - Storm
+
+Hulk: Hard Counter - Wolverine, Hawkeye, Iron Man
+    Soft Counter - Dr Strange, Venom, Hulk
+
+Invisible Woman: Hard Counter - Moon Knight, Jeff, Hela, Hawkeye, Black Panther, Spiderman, Psylocke, Iron Fist
+
+Iron Fist: Hard Counter - Magik, Namor, Mantis, Luna Snow
+    Soft Counter -Spiderman
+
+Iron Man: Hard Counter - Hela, Hawkeye
+    Soft Counter - Iron Man, Storm, Punisher
+
+Jeff the Land Shark: Hard Counter - Psylocke, Iron Fist, Magik, Hela Hawkeye, Peni
+
+Loki: Hard Counter - Iron Man, Punisher
+    Soft Counter - Dr Strange, Hulk, Magneto, Venom, Peni
+
+Luna Snow: Hard Counter - Iron Man, Magneto, Dr Strange, Hawkeye, Hela, Jeff, Psylocke, Spiderman, Magik, Black Panther
+
+Magik: Hard Counter - Namor, Loki, Iron Man, Punisher ShotGun
+    Soft Counter - Magik, Iron Fist
+
+Magneto: Hard Counter - Moon Knight, Hawkeye, Dr Strange, Venom
+
+Mantis: Hard Counter - Moon Knight, Iron Man, Punisher, Storm, Dr Strange, Psylocke, Magik, Iron Fist
+
+Mister Fantastic: Hard Counter - Squirrel Girl, Hawkeye, Hela, Bucky, Peni, Punisher
+
+Moon Knight: Hard Counter - Moon Knight, Hawkeye, Hela, Psylocke, Iron Fist, Spiderman, Hulk, Venom
+
+Namor: Hard Counter - Hawkeye, Hela, Punisher, Starlord
+    Soft Counter - Squirrel Girl
+
+Peni Parker: Hard Counter - Groot, Hulk, Venom 
+    Soft Counter - Iron Man, Squirrel Girl, Thor
+
+Psylocke: Hard Counter - Namor, Magik, Iron Fist, Storm, Iron Man, Groot, Peni Parker
+    Soft Counter - Starlord
+
+The Punisher: Hard Counter - Dr Strange, Magneto, Magik, Psylocke
+    Soft Counter - Punisher, Starlord
+
+Rocket Raccoon: Hard Counter - Magik, Iron Fist, Storm
+    Soft Counter - Venom, Thor
+
+Scarlet Witch: Hard Counter - A functioning Brain, Hela, Hawkeye, Magik, Punisher
+
+Squirrel Girl: Hard Counter - Magneto, Hawkeye, Hela, Iron Man, Storm, Starlord
+
+Spider Man: Hard Counter - Namor, Loki, Dr Strange*, Magik, Namor+LunaSnow, Mantis, Luna Snow 
+    Soft Counter - Spiderman
+
+Star Lord: Hard Counter - Magneto, Dr Strange, Groot, Punisher, Magik
+
+Storm: Hard Counter - Hawkeye, Hela, Iron Man, Dr Strange, Mantis
+
+Thor: Hard Counter - Moon Knight, Iron Man, Storm, Starlord, Magik, Wolverine, Punisher, Peni Parker
+    Soft Counter - Namor
+
+Venom: Hard Counter - Wolverine, Peni Parker, Namor, StarLord, Moon Knight
+
+Winter Soldier: Hard Counter - Punisher, Psylocke, Magik, Black Panther, Magneto, Dr Strange, Venom, Hulk, Groot
+
+Wolverine: Hard Counter - Magneto, Iron Man, Storm, Hawkeye, Hela, Magik
