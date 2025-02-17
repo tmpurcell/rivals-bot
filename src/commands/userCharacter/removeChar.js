@@ -1,130 +1,114 @@
 const { Client, ApplicationCommandOptionType, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js');
 const Character = require('../../models/characterUpdate');
+const activeCollectors = new Map();
 
 module.exports = {
     /**
-     * 
-     * @param {Client} client 
-     * @param {Interaction} interaction 
+     * @param {Client} client
+     * @param {Interaction} interaction
      */
     callback: async (client, interaction) => {
-        const userId = interaction.user.id; // Get the user ID of the person invoking the command
-        const guildId = interaction.guildId; // Get the guild ID
+        const userId = interaction.user.id;
+        const guildId = interaction.guildId;
 
         try {
-            // Query the database for all characters of the invoking user in the guild
+            // Defer the reply to avoid multiple response errors
+            await interaction.deferReply({ ephemeral: true });
+
+            // Stop any previous collector for this user
+            if (activeCollectors.has(userId)) {
+                const existingCollector = activeCollectors.get(userId);
+                existingCollector.stop(); // Stop any previous collector
+                activeCollectors.delete(userId); // Remove it from the map
+            }
+
+            // Ensure a proper response if no characters are found
             const characters = await Character.find({ userId, guildId });
 
             if (characters.length === 0) {
-                await interaction.reply({
+                await interaction.editReply({
                     content: `No characters found for <@${userId}>.`,
-                    ephemeral: true,
+                    components: []
                 });
                 return;
             }
 
-            // Create an array of action rows
             let rows = [];
             let currentRow = new ActionRowBuilder();
 
-            // Iterate through each class and its characters to create a button for each character
             characters.forEach((char, index) => {
-                const formattedCharacter = Array.isArray(char.character) ? char.character.join(', ') : char.character;
-
-                // For each character in the list, create a button
                 if (Array.isArray(char.character)) {
                     char.character.forEach((individualChar, charIndex) => {
-                        // If the current row already has 5 buttons, create a new row
                         if (currentRow.components.length >= 5) {
                             rows.push(currentRow);
                             currentRow = new ActionRowBuilder();
                         }
-
                         currentRow.addComponents(
                             new ButtonBuilder()
-                                .setCustomId(`remove-${index}-${charIndex}`)  // Unique button ID for each character
+                                .setCustomId(`remove-${index}-${charIndex}`)
                                 .setLabel(`${individualChar} (${char.class})`)
-                                .setStyle(ButtonStyle.Danger)  // Red style for removal
+                                .setStyle(ButtonStyle.Danger)
                         );
                     });
-                } else {
-                    // If it's a single character (not an array), add it as a button
-                    if (currentRow.components.length >= 5) {
-                        rows.push(currentRow);
-                        currentRow = new ActionRowBuilder();
-                    }
-
-                    currentRow.addComponents(
-                        new ButtonBuilder()
-                            .setCustomId(`remove-${index}-0`)  // Only one character in the list
-                            .setLabel(`${formattedCharacter} (${char.class})`)
-                            .setStyle(ButtonStyle.Danger)
-                    );
                 }
             });
 
-            // Push any remaining rows
             if (currentRow.components.length > 0) {
                 rows.push(currentRow);
             }
 
-            await interaction.reply({
+            await interaction.editReply({
                 content: `Select a character to remove from your list:`,
-                components: rows,
-                ephemeral: true,  // Make the message ephemeral so others can’t see it
+                components: rows
             });
 
-            // Create a filter to ensure only the user who initiated the interaction can respond
-            const filter = (btnInteraction) => btnInteraction.user.id === userId;  // Ensure only the user who invoked the command can interact
+            const filter = (btnInteraction) => btnInteraction.user.id === userId;
 
-            // Wait for the user to click a button (up to 30 seconds)
             const collector = interaction.channel.createMessageComponentCollector({
                 filter,
-                componentType: ComponentType.Button, // Listen for button clicks
-                time: 30000, // 30 seconds to wait for a response
+                componentType: ComponentType.Button,
             });
+
+            activeCollectors.set(userId, collector);  // Register the new collector
 
             collector.on('collect', async (btnInteraction) => {
-                const [buttonType, buttonIndex, charIndex] = btnInteraction.customId.split('-');  // Get the indices from the button ID
-                const characterToRemove = characters[parseInt(buttonIndex)].character[parseInt(charIndex)];  // Get the specific character
+                const [_, buttonIndex, charIndex] = btnInteraction.customId.split('-');
+                const characterToRemove = characters[parseInt(buttonIndex)].character[parseInt(charIndex)];
 
                 try {
-                    // Remove the character from the database
+                    // Update the character list by removing the selected character
                     await Character.updateOne(
-                        { userId, guildId, class: characters[parseInt(buttonIndex)].class },  // Ensure correct class is targeted
-                        { $pull: { character: characterToRemove } }, // Pull the exact character to remove
-                        { new: true } // Return the updated document
+                        { userId, guildId, class: characters[parseInt(buttonIndex)].class },
+                        { $pull: { character: characterToRemove } }
                     );
 
-                    // Notify the user about the successful removal
+                    // Clear the buttons and stop the collector
                     await btnInteraction.update({
-                        content: `Character removed successfully! Character: **${characterToRemove}**.`,
-                        components: [], // Remove the buttons after the action
+                        content: `Character removed successfully: **${characterToRemove}**.`,
+                        components: [],  // Clear the buttons
+                        ephemeral: true
                     });
+
+                    collector.stop();  // Stop the collector as the action is complete
+
                 } catch (error) {
                     console.error(error);
-                    await btnInteraction.reply({
-                        content: 'There was an error removing your character. Please try again later.',
-                        ephemeral: true,
-                    });
-                }
-
-                collector.stop(); // Stop the collector once a button is clicked
-            });
-
-            collector.on('end', (collected, reason) => {
-                if (reason === 'time') {
-                    interaction.editReply({
-                        content: 'You did not select a character in time. Please try again.',
-                        components: [], // Remove the buttons
+                    await btnInteraction.update({
+                        content: 'Error removing character. Try again later.',
+                        ephemeral: true
                     });
                 }
             });
+
+            collector.on('end', () => {
+                activeCollectors.delete(userId);  // Clean up the collector once done
+            });
+
         } catch (error) {
             console.error(error);
-            await interaction.reply({
+            await interaction.editReply({
                 content: 'There was an error fetching your characters.',
-                ephemeral: true,
+                components: []
             });
         }
     },

@@ -14,8 +14,12 @@ module.exports = {
     Displays a list of all current commands that the bot is able to complete!
 
 **/add**  
-   Update the database with your playable characters. First, select what class you wish to add to, then follow the instructions in the pop-up text box (entering characters separated by commas if multiple).  
+   Update the database with your playable characters. /add +class then provides a dropdown menu based on the class you have selected. It will auto update your db with the hero selected!  
    *Logic automatically removes duplicate entries regardless of capitalization and format (e.g., "starlord" and "Star-Lord").*
+
+**/learning**
+      This allows you to add characters to the learning class. This is in a different command due to the complexity of the code. Select any number of characters from 
+      any of the three classes. Tank, DPS, Healer!
 
  **/remove**  
    Allows you to remove a character from your list.  
